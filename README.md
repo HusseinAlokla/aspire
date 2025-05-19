@@ -1,54 +1,86 @@
-# React + TypeScript + Vite
+# 📚 Media Tracker with AI Description Generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack project using **React + TypeScript** for the frontend and **FastAPI + MongoDB** for the backend. Users can manage a list of media items (books, movies, etc.), and generate AI-powered descriptions for new titles using Cohere.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+### 🖥️ Frontend
+- Built with **React + Vite + TypeScript**
+- Responsive UI with **Tailwind CSS**
+- Pages:
+  - `Home`: Welcome page
+  - `Tracker`: Create, search, update, delete media
+  - `AI Description`: Generate creative AI-based blurbs for titles
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 🔧 Backend
+- Built with **FastAPI** (Python)
+- Connected to **MongoDB Atlas** using `motor`
+- Routes:
+  - `GET /media` — List media
+  - `POST /media` — Add new
+  - `DELETE /media/{id}` — Delete
+  - `PUT /media/{id}` — Update
+  - `POST /describe` — AI description using Cohere
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+---
+
+## 🧪 Getting Started
+
+### 🔙 Backend Setup
+```bash
+cd media-tracker-backend
+python -m venv venv
+venv\Scripts\activate  # or source venv/bin/activate
+pip install -r requirements.txt
+
+# Add your API key to .env
+COHERE_API_KEY=your_real_key
+
+uvicorn app.main:app --reload
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### 🌐 Frontend Setup
+```bash
+cd media-tracker
+npm install
+npm run dev
 ```
+
+Visit: `http://localhost:5173`
+
+---
+
+## 🧠 AI Description Feature
+Powered by **Cohere API**. 
+Generate a short description from a title and genre.
+
+### Example Prompt:
+> "Generate a short, creative description for a horror titled 'Dark Rain'"
+
+### Example Output:
+> "A chilling tale of a town drenched in fear as a mysterious rain awakens long-buried nightmares."
+
+---
+
+## 🛠️ Tech Stack
+- **Frontend**: React, TypeScript, Vite, Tailwind CSS
+- **Backend**: FastAPI, Python, Uvicorn, MongoDB, Motor, JWT
+- **AI**: Cohere API (via `requests`)
+
+---
+
+## 📦 Environment Variables
+Add a `.env` file in your backend root:
+
+```env
+MONGO_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net/media-tracker?retryWrites=true&w=majority
+DB_NAME=media-tracker
+COHERE_API_KEY=your_real_cohere_api_key
+```
+
+---
+
+## 📄 License
+MIT — free to use, learn, and improve.
